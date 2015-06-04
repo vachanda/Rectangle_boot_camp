@@ -7,7 +7,7 @@ class Rectangle
 	end
 
 	def perimeter
-		return 7
+		(2 * (@length + @breadth))/1000.00
 	end
 
 end
