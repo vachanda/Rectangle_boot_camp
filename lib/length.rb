@@ -1,5 +1,6 @@
 #Job: Represents the dimention of a geometric polygon 
 class Length
+	alias_method :==, :eql?
 	METER = "m"
 	CENTIMETER = "cm"
 	MILLIMETER = "mm"
@@ -18,7 +19,7 @@ class Length
 	end
 
 	def hash
-		['value'].Hash
+		@value.hash
 	end
 
 end
