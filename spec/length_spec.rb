@@ -37,6 +37,35 @@ describe Length do
 			length_2 = ""
 			expect(length_1).to_not eq(length_2)
 		end		
+	end
+	
+	context "Addition" do
+		it "with length 4.3m and length 0.7m should be 5m" do
+			length_1 = Length.new(4.3, Length::METER)
+			length_2 = "abc"
+			expect{length_1 + length_2}.to raise_error(TypeError)
+		end
 
+		it "with length 4.3m and length 0.7m should be 5m" do
+			length_1 = Length.new(4.3, Length::METER)
+			length_2 = Length.new(0.7, Length::METER)
+			length_3 = Length.new(5000 , Length::MILLIMETER) 
+			expect(length_1 + length_2).to eq(length_3)
+		end
+	end
+
+	context "Multiplication" do
+		it "2 with length 4.3m should be 8.6m" do
+			length_1 = Length.new(4.3, Length::METER)
+			length_2 = Length.new(8.6, Length::METER)
+			expect(length_1 * 2).to eq(length_2)
+		end
+
+		it "with length 4.3m and length 0.7m should be 5m" do
+			length_1 = Length.new(4.3, Length::METER)
+			length_2 = Length.new(0.7, Length::METER)
+			length_3 = Length.new(5000 , Length::MILLIMETER) 
+			expect(length_1 + length_2).to eq(length_3)
+		end
 	end
 end
