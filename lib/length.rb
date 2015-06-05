@@ -1,10 +1,24 @@
 #Job: Represents the dimention of a geometric polygon 
 class Length
-	attr_reader :converted_dimension_in_mm
+	METER = "m"
+	CENTIMETER = "cm"
+	MILLIMETER = "mm"
+	
+	attr_reader :value
 
-	def initialize (side)
-		@converted_dimension_in_mm = side[:m] * 1000 + side[:cm] * 10 + side[:mm]]
-		@metric_unit = 'mm'
+	def initialize (length, unit)
+		@value = length * 1000 if unit == METER
+		@value = length * 10 if unit == CENTIMETER
+		@value = length if unit == MILLIMETER
+	end
+
+	def ==(length)
+		return false unless self.class == length.class 
+		return true if self.value == length.value
+	end
+
+	def hash
+		['value'].Hash
 	end
 
 end
