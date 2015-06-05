@@ -3,6 +3,7 @@ class Rectangle
 	def initialize(side_a, side_b)
 		@length = side_a.converted_dimension_in_mm
 		@breadth = side_b.converted_dimension_in_mm
+		@side_unit = side_a.metric_unit
 	end
 
 	def perimeter
