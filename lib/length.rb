@@ -1,11 +1,21 @@
 #Job: Represents the dimention of a geometric polygon 
 class Length
 	alias_method :==, :eql?
-	METER = "m"
-	CENTIMETER = "cm"
-	MILLIMETER = "mm"
 	
-	attr_reader :value
+	
+	attr_reader :value, :unit
+
+	def self.in_meter(value)
+		new(value, Unit::METER)
+	end
+	
+	def self.in_centimeter(value)
+		new(value, Unit::CENTIMETER)
+	end
+	
+	def self.in_millimeter(value)
+		new(value, Unit::MILLIMETER)
+	end
 
 	def initialize (length, unit)
 		@value = length
@@ -14,25 +24,22 @@ class Length
 
 	def ==(length)
 		return false unless self.class == length.class 
-		return true if self.convert_in_mm() == length.convert_in_mm()
+		length_in_mm == length.length_in_mm
 	end
 
 	def hash
-		@value.hash
+		[value, unit].hash
 	end
 
 	def +(other_length)
-		raise TypeError if self.class != other_length.class
-		Length.new(self.convert_in_mm + other_length.convert_in_mm, MILLIMETER)
-		end 
-
-	def *(factor)
-		return Length.new(self.convert_in_mm * factor, MILLIMETER)
+		Length.new( self.length_in_mm + other_length.length_in_mm , Unit::MILLIMETER)
 	end 
 
-	def convert_in_mm
-		return @value * 1000 if @unit == METER
-		return @value * 10 if @unit == CENTIMETER
-		return @value 
+	def length_in_mm
+		value * unit.in_mm
 	end
+
+	def *(factor)
+		return Length.new( value * unit.in_mm * factor, Unit::MILLIMETER)
+	end 
 end
